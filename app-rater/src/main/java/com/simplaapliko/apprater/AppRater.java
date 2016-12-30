@@ -22,10 +22,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.List;
 
 public final class AppRater {
@@ -37,7 +39,7 @@ public final class AppRater {
      * based on the first launch date, launch count and do not show again
      * shared preferences.
      *
-     * @param activity
+     * @param activity FragmentActivity
      */
 
     public static void appLaunched(FragmentActivity activity) {
@@ -49,7 +51,7 @@ public final class AppRater {
      * based on the first launch date, launch count and do not show again
      * shared preferences.
      *
-     * @param activity
+     * @param activity FragmentActivity
      * @param onPositiveButtonListener Positive button click listener
      * @param onNegativeButtonListener Negative button click listener
      * @param onNeutralButtonListener Neutral button click listener
@@ -59,9 +61,6 @@ public final class AppRater {
             DialogInterface.OnClickListener onPositiveButtonListener,
             DialogInterface.OnClickListener onNegativeButtonListener,
             DialogInterface.OnClickListener onNeutralButtonListener) {
-
-        int dayUntilPrompt = activity.getResources().getInteger(R.integer.ar_app_rater_days_until_prompt);
-        int launchesUntilPrompt = activity.getResources().getInteger(R.integer.ar_app_rater_launches_until_prompt);
 
         PreferencesHelper preferences = new PreferencesHelper(activity);
 
@@ -79,9 +78,7 @@ public final class AppRater {
             preferences.setFirstLaunchDate(System.currentTimeMillis());
         }
 
-        // Wait at least n days before opening
-        if (launchCount >= launchesUntilPrompt &&
-                (System.currentTimeMillis() >= firstLaunchDate + dayUntilPrompt * DAY)) {
+        if (isTimeToRate(activity)) {
 
             RateAppDialog dialog = new RateAppDialog.Builder()
                     .build();
@@ -100,6 +97,35 @@ public final class AppRater {
 
             dialog.show((activity).getSupportFragmentManager(), null);
         }
+    }
+
+    public static Date getFirstLaunchDate(Context context) {
+        PreferencesHelper preferences = new PreferencesHelper(context);
+        long firstLaunchDate = preferences.getFirstLaunchDate();
+        return new Date(firstLaunchDate);
+    }
+
+    public static int getLaunchCount(Context context) {
+        PreferencesHelper preferences = new PreferencesHelper(context);
+        return preferences.getLaunchCount();
+    }
+
+    public static boolean isDoNotShowAgain(Context context) {
+        PreferencesHelper preferences = new PreferencesHelper(context);
+        return preferences.isDoNoShowAgain();
+    }
+
+    public static boolean isTimeToRate(Context context) {
+        PreferencesHelper preferences = new PreferencesHelper(context);
+        Resources resources = context.getResources();
+
+        int dayUntilPrompt = resources.getInteger(R.integer.ar_app_rater_days_until_prompt);
+        int launchesUntilPrompt = resources.getInteger(R.integer.ar_app_rater_launches_until_prompt);
+        int launchCount = preferences.getLaunchCount();
+        long firstLaunchDate = preferences.getFirstLaunchDate();
+
+        return launchCount >= launchesUntilPrompt &&
+                (System.currentTimeMillis() >= firstLaunchDate + dayUntilPrompt * DAY);
     }
 
     /**
