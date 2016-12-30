@@ -29,9 +29,9 @@ import android.widget.Toast;
 import com.simplaapliko.apprater.AppRater;
 import com.simplaapliko.apprater.RateAppDialog;
 
-public class MainActivityFragment extends Fragment implements DialogInterface.OnClickListener {
+public class MainFragment extends Fragment implements DialogInterface.OnClickListener {
 
-    public MainActivityFragment() {
+    public MainFragment() {
     }
 
     @Override
@@ -53,9 +53,9 @@ public class MainActivityFragment extends Fragment implements DialogInterface.On
                 DialogFragment dialog = new RateAppDialog.Builder()
                         .build();
 
-                ((RateAppDialog) dialog).setOnPositiveButtonListener(MainActivityFragment.this);
-                ((RateAppDialog) dialog).setOnNegativeButtonListener(MainActivityFragment.this);
-                ((RateAppDialog) dialog).setOnNeutralButtonListener(MainActivityFragment.this);
+                ((RateAppDialog) dialog).setOnPositiveButtonListener(MainFragment.this);
+                ((RateAppDialog) dialog).setOnNegativeButtonListener(MainFragment.this);
+                ((RateAppDialog) dialog).setOnNeutralButtonListener(MainFragment.this);
 
                 dialog.show(getFragmentManager(), RateAppDialog.class.getSimpleName());
             }
