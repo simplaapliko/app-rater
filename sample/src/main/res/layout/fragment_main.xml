@@ -24,7 +24,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:gravity="center"
     tools:context="com.simplaapliko.apprater.sample.MainFragment"
     tools:showIn="@layout/activity_main"
     >
@@ -34,6 +33,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/show_rate_dialog"
+        />
+
+    <Button
+        android:id="@+id/get_first_launch_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_first_launch_date"
+        />
+
+    <Button
+        android:id="@+id/get_launch_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/get_launch_count"
+        />
+
+    <Button
+        android:id="@+id/is_do_not_show_again"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/is_do_not_show_again"
+        />
+
+    <Button
+        android:id="@+id/is_time_to_rate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/is_time_to_rate"
         />
 
 </LinearLayout>

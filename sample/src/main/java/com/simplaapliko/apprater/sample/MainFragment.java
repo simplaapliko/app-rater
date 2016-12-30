@@ -23,11 +23,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.simplaapliko.apprater.AppRater;
 import com.simplaapliko.apprater.RateAppDialog;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainFragment extends Fragment implements DialogInterface.OnClickListener {
 
@@ -45,8 +48,7 @@ public class MainFragment extends Fragment implements DialogInterface.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        Button showDialog = (Button) view.findViewById(R.id.show_dialog);
-        showDialog.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.show_dialog).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -58,6 +60,49 @@ public class MainFragment extends Fragment implements DialogInterface.OnClickLis
                 ((RateAppDialog) dialog).setOnNeutralButtonListener(MainFragment.this);
 
                 dialog.show(getFragmentManager(), RateAppDialog.class.getSimpleName());
+            }
+        });
+
+        view.findViewById(R.id.get_first_launch_date).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
+                Date firstLaunch = AppRater.getFirstLaunchDate(getContext());
+                Toast.makeText(getContext(), format.format(firstLaunch), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.get_launch_count).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int launchCount = AppRater.getLaunchCount(getContext());
+                Toast.makeText(getContext(), String.valueOf(launchCount), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.is_do_not_show_again).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String isTimeToRate;
+                if (AppRater.isDoNotShowAgain(getContext())) {
+                    isTimeToRate = "yes";
+                } else {
+                    isTimeToRate = "no";
+                }
+                Toast.makeText(getContext(), isTimeToRate, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        view.findViewById(R.id.is_time_to_rate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String isTimeToRate;
+                if (AppRater.isTimeToRate(getContext())) {
+                    isTimeToRate = "yes";
+                } else {
+                    isTimeToRate = "no";
+                }
+                Toast.makeText(getContext(), isTimeToRate, Toast.LENGTH_SHORT).show();
             }
         });
 

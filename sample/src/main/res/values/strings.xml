@@ -18,4 +18,8 @@
     <string name="app_name">App Rater Sample</string>
 
     <string name="show_rate_dialog">Show Rate Dialog</string>
+    <string name="get_launch_count">Get launch count</string>
+    <string name="get_first_launch_date">Get first launch date</string>
+    <string name="is_do_not_show_again">Is do not show again</string>
+    <string name="is_time_to_rate">Is time to rate</string>
 </resources>
