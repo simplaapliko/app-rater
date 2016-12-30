@@ -43,7 +43,7 @@ public class PreferencesHelper {
         mContext.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
                 .edit()
                 .putLong(PREF_FIRST_LAUNCH_DATE, date)
-                .commit();
+                .apply();
 
         return this;
     }
@@ -57,7 +57,7 @@ public class PreferencesHelper {
         mContext.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
                 .edit()
                 .putInt(PREF_LAUNCH_COUNT, count)
-                .commit();
+                .apply();
 
         return this;
     }
@@ -71,7 +71,7 @@ public class PreferencesHelper {
         mContext.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
                 .edit()
                 .putBoolean(PREF_DO_NOT_SHOW_AGAIN, enabled)
-                .commit();
+                .apply();
 
         return this;
     }
