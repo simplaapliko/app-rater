@@ -41,7 +41,6 @@ public final class AppRater {
      *
      * @param activity FragmentActivity
      */
-
     public static void appLaunched(FragmentActivity activity) {
         appLaunched(activity, null, null, null);
     }
@@ -68,6 +67,49 @@ public final class AppRater {
             return;
         }
 
+        increment(activity);
+
+        if (isTimeToRate(activity)) {
+            showDialog(activity, onPositiveButtonListener, onNegativeButtonListener,
+                    onNeutralButtonListener);
+        }
+    }
+
+    public static void showDialog(FragmentActivity activity) {
+        showDialog(activity, null, null, null);
+    }
+
+    public static void showDialog(
+            FragmentActivity activity,
+            DialogInterface.OnClickListener onPositiveButtonListener,
+            DialogInterface.OnClickListener onNegativeButtonListener,
+            DialogInterface.OnClickListener onNeutralButtonListener) {
+
+        RateAppDialog dialog = new RateAppDialog.Builder()
+                .build();
+
+        if (onPositiveButtonListener != null) {
+            dialog.setOnPositiveButtonListener(onPositiveButtonListener);
+        }
+
+        if (onNegativeButtonListener != null) {
+            dialog.setOnNegativeButtonListener(onNegativeButtonListener);
+        }
+
+        if (onNeutralButtonListener != null) {
+            dialog.setOnNeutralButtonListener(onNeutralButtonListener);
+        }
+
+        dialog.show((activity).getSupportFragmentManager(), null);
+    }
+
+    /**
+     * Increment launch count and set first launch date
+     * @param context Context
+     */
+    public static void increment(Context context) {
+        PreferencesHelper preferences = new PreferencesHelper(context);
+
         // Increment the launch counter
         int launchCount = preferences.getLaunchCount() + 1;
         preferences.setLaunchCount(launchCount);
@@ -76,26 +118,6 @@ public final class AppRater {
         long firstLaunchDate = preferences.getFirstLaunchDate();
         if (firstLaunchDate == 0) {
             preferences.setFirstLaunchDate(System.currentTimeMillis());
-        }
-
-        if (isTimeToRate(activity)) {
-
-            RateAppDialog dialog = new RateAppDialog.Builder()
-                    .build();
-
-            if (onPositiveButtonListener != null) {
-                dialog.setOnPositiveButtonListener(onPositiveButtonListener);
-            }
-
-            if (onNegativeButtonListener != null) {
-                dialog.setOnNegativeButtonListener(onNegativeButtonListener);
-            }
-
-            if (onNeutralButtonListener != null) {
-                dialog.setOnNeutralButtonListener(onNeutralButtonListener);
-            }
-
-            dialog.show((activity).getSupportFragmentManager(), null);
         }
     }
 
