@@ -146,8 +146,9 @@ public final class AppRater {
         int launchCount = preferences.getLaunchCount();
         long firstLaunchDate = preferences.getFirstLaunchDate();
 
-        return launchCount >= launchesUntilPrompt &&
-                (System.currentTimeMillis() >= firstLaunchDate + dayUntilPrompt * DAY);
+        return !preferences.isDoNoShowAgain() &&
+                (launchCount >= launchesUntilPrompt &&
+                (System.currentTimeMillis() >= firstLaunchDate + dayUntilPrompt * DAY));
     }
 
     /**
