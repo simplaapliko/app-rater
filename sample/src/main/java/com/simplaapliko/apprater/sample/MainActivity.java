@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Oleg Kan, @Simplaapliko
+ * Copyright (C) 2015 Oleg Kan
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@
 package com.simplaapliko.apprater.sample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 

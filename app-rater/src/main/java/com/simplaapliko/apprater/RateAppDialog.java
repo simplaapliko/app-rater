@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Oleg Kan, @Simplaapliko
+ * Copyright (C) 2015 Oleg Kan
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,11 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.DialogFragment;
 
 public class RateAppDialog extends DialogFragment {
 

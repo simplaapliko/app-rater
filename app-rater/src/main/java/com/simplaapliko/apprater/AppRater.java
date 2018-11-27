@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Oleg Kan, @Simplaapliko
+ * Copyright (C) 2015 Oleg Kan
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import java.util.Date;
 import java.util.List;
+
+import androidx.fragment.app.FragmentActivity;
 
 public final class AppRater {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Oleg Kan, @Simplaapliko
+ * Copyright (C) 2015 Oleg Kan
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,6 @@ package com.simplaapliko.apprater.sample;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +29,9 @@ import com.simplaapliko.apprater.RateAppDialog;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
 public class MainFragment extends Fragment implements DialogInterface.OnClickListener {
 
