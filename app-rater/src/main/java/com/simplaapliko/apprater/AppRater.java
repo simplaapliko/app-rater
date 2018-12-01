@@ -31,6 +31,7 @@ import java.util.List;
 
 import androidx.fragment.app.FragmentActivity;
 
+@SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess", "unused"})
 public final class AppRater {
 
     private static final int DAY = 24 * 60 * 60 * 1000;
@@ -209,9 +210,8 @@ public final class AppRater {
     }
 
     private static boolean isIntentCallable(Context context, Intent intent) {
-        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(
-                intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
+        List<ResolveInfo> list = context.getPackageManager()
+                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
     }
 }

@@ -26,6 +26,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
+@SuppressWarnings("unused")
 public class RateAppDialog extends DialogFragment {
 
     public static class Builder {
@@ -123,7 +124,7 @@ public class RateAppDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        View rootView = getActivity().getLayoutInflater().inflate(R.layout.ar_dialog_fragment_rate_app, null);
+        View rootView = View.inflate(getContext(), R.layout.ar_dialog_fragment_rate_app, null);
 
         initUiWidgets(rootView);
 
@@ -133,50 +134,38 @@ public class RateAppDialog extends DialogFragment {
 
         builder.setPositiveButton(
                 mPositiveButton,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                (dialog, which) -> {
+                    AppRater.rateApp(getContext());
 
-                        AppRater.rateApp(getContext());
-
-                        if (mOnPositiveButtonListener != null) {
-                            mOnPositiveButtonListener.onClick(dialog, which);
-                        }
-
-                        dialog.dismiss();
+                    if (mOnPositiveButtonListener != null) {
+                        mOnPositiveButtonListener.onClick(dialog, which);
                     }
+
+                    dialog.dismiss();
                 });
 
         builder.setNegativeButton(
                 mNegativeButton,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                (dialog, which) -> {
+                    AppRater.remindLater(getContext());
 
-                        AppRater.remindLater(getContext());
-
-                        if (mOnNegativeButtonListener != null) {
-                            mOnNegativeButtonListener.onClick(dialog, which);
-                        }
-
-                        dialog.dismiss();
+                    if (mOnNegativeButtonListener != null) {
+                        mOnNegativeButtonListener.onClick(dialog, which);
                     }
+
+                    dialog.dismiss();
                 });
 
         builder.setNeutralButton(
                 mNeutralButton,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                (dialog, which) -> {
+                    AppRater.cancelReminders(getContext());
 
-                        AppRater.cancelReminders(getContext());
-
-                        if (mOnNeutralButtonListener != null) {
-                            mOnNeutralButtonListener.onClick(dialog, which);
-                        }
-
-                        dialog.dismiss();
+                    if (mOnNeutralButtonListener != null) {
+                        mOnNeutralButtonListener.onClick(dialog, which);
                     }
+
+                    dialog.dismiss();
                 });
 
         builder.setView(rootView);
@@ -210,8 +199,7 @@ public class RateAppDialog extends DialogFragment {
 
     private void initUiWidgets(View rootView) {
 
-        TextView appNameTextView = (TextView) rootView.findViewById(R.id.message);
+        TextView appNameTextView = rootView.findViewById(R.id.message);
         appNameTextView.setText(mMessage);
-
     }
 }

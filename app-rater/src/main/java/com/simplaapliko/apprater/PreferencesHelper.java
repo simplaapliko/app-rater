@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Oleg Kan, @Simplaapliko
+ * Copyright (C) 2015 Oleg Kan
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@ package com.simplaapliko.apprater;
 
 import android.content.Context;
 
-public class PreferencesHelper {
+@SuppressWarnings("UnusedReturnValue")
+class PreferencesHelper {
 
     private static final String PREFERENCES = "com.simplaapliko.apprater.preferences";
 
@@ -26,7 +27,7 @@ public class PreferencesHelper {
     private static final String PREF_LAUNCH_COUNT = "launch_count";
     private static final String PREF_DO_NOT_SHOW_AGAIN = "do_not_show_again";
 
-    static final int NOT_SET = 0;
+    private static final int NOT_SET = 0;
 
     private Context mContext;
 
@@ -67,6 +68,7 @@ public class PreferencesHelper {
                 .getBoolean(PREF_DO_NOT_SHOW_AGAIN, false);
     }
 
+    @SuppressWarnings("SameParameterValue")
     PreferencesHelper setDoNoShowAgain(boolean enabled) {
         mContext.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
                 .edit()
