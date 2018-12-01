@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.simplaapliko:app-rater:1.1.0'
+    implementation 'com.simplaapliko:app-rater:1.1.1'
 }
 ```
 
