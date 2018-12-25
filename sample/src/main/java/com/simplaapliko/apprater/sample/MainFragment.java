@@ -24,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.simplaapliko.apprater.AppRater;
-import com.simplaapliko.apprater.RateAppDialog;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,7 +31,6 @@ import java.util.Date;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 public class MainFragment extends Fragment implements DialogInterface.OnClickListener {
@@ -53,15 +51,8 @@ public class MainFragment extends Fragment implements DialogInterface.OnClickLis
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         view.findViewById(R.id.show_dialog).setOnClickListener(v -> {
-
-            DialogFragment dialog = new RateAppDialog.Builder()
-                    .build();
-
-            ((RateAppDialog) dialog).setOnPositiveButtonListener(MainFragment.this);
-            ((RateAppDialog) dialog).setOnNegativeButtonListener(MainFragment.this);
-            ((RateAppDialog) dialog).setOnNeutralButtonListener(MainFragment.this);
-
-            dialog.show(getFragmentManager(), RateAppDialog.class.getSimpleName());
+            AppRater.showDialog(getActivity(), MainFragment.this,
+                    MainFragment.this, MainFragment.this);
         });
 
         view.findViewById(R.id.get_first_launch_date).setOnClickListener(v -> {
