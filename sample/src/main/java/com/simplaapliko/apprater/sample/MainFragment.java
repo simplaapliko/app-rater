@@ -52,62 +52,47 @@ public class MainFragment extends Fragment implements DialogInterface.OnClickLis
             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        view.findViewById(R.id.show_dialog).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        view.findViewById(R.id.show_dialog).setOnClickListener(v -> {
 
-                DialogFragment dialog = new RateAppDialog.Builder()
-                        .build();
+            DialogFragment dialog = new RateAppDialog.Builder()
+                    .build();
 
-                ((RateAppDialog) dialog).setOnPositiveButtonListener(MainFragment.this);
-                ((RateAppDialog) dialog).setOnNegativeButtonListener(MainFragment.this);
-                ((RateAppDialog) dialog).setOnNeutralButtonListener(MainFragment.this);
+            ((RateAppDialog) dialog).setOnPositiveButtonListener(MainFragment.this);
+            ((RateAppDialog) dialog).setOnNegativeButtonListener(MainFragment.this);
+            ((RateAppDialog) dialog).setOnNeutralButtonListener(MainFragment.this);
 
-                dialog.show(getFragmentManager(), RateAppDialog.class.getSimpleName());
-            }
+            dialog.show(getFragmentManager(), RateAppDialog.class.getSimpleName());
         });
 
-        view.findViewById(R.id.get_first_launch_date).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
-                Date firstLaunch = AppRater.getFirstLaunchDate(getContext());
-                Toast.makeText(getContext(), format.format(firstLaunch), Toast.LENGTH_SHORT).show();
-            }
+        view.findViewById(R.id.get_first_launch_date).setOnClickListener(v -> {
+            DateFormat format = SimpleDateFormat.getDateInstance(DateFormat.LONG);
+            Date firstLaunch = AppRater.getFirstLaunchDate(getContext());
+            Toast.makeText(getContext(), format.format(firstLaunch), Toast.LENGTH_SHORT).show();
         });
 
-        view.findViewById(R.id.get_launch_count).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int launchCount = AppRater.getLaunchCount(getContext());
-                Toast.makeText(getContext(), String.valueOf(launchCount), Toast.LENGTH_SHORT).show();
-            }
+        view.findViewById(R.id.get_launch_count).setOnClickListener(v -> {
+            int launchCount = AppRater.getLaunchCount(getContext());
+            Toast.makeText(getContext(), String.valueOf(launchCount), Toast.LENGTH_SHORT).show();
         });
 
-        view.findViewById(R.id.is_do_not_show_again).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String isTimeToRate;
-                if (AppRater.isDoNotShowAgain(getContext())) {
-                    isTimeToRate = "yes";
-                } else {
-                    isTimeToRate = "no";
-                }
-                Toast.makeText(getContext(), isTimeToRate, Toast.LENGTH_SHORT).show();
+        view.findViewById(R.id.is_do_not_show_again).setOnClickListener(v -> {
+            String isTimeToRate;
+            if (AppRater.isDoNotShowAgain(getContext())) {
+                isTimeToRate = "yes";
+            } else {
+                isTimeToRate = "no";
             }
+            Toast.makeText(getContext(), isTimeToRate, Toast.LENGTH_SHORT).show();
         });
 
-        view.findViewById(R.id.is_time_to_rate).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String isTimeToRate;
-                if (AppRater.isTimeToRate(getContext())) {
-                    isTimeToRate = "yes";
-                } else {
-                    isTimeToRate = "no";
-                }
-                Toast.makeText(getContext(), isTimeToRate, Toast.LENGTH_SHORT).show();
+        view.findViewById(R.id.is_time_to_rate).setOnClickListener(v -> {
+            String isTimeToRate;
+            if (AppRater.isTimeToRate(getContext())) {
+                isTimeToRate = "yes";
+            } else {
+                isTimeToRate = "no";
             }
+            Toast.makeText(getContext(), isTimeToRate, Toast.LENGTH_SHORT).show();
         });
 
         return view;

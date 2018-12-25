@@ -18,9 +18,4 @@
 <resources>
     <integer name="ar_app_rater_days_until_prompt">7</integer>
     <integer name="ar_app_rater_launches_until_prompt">10</integer>
-
-    <!-- if true RateAppDialog will have buttons (positive, negative and neutral)
-         if false then dialog will have a list with choices,
-            this could be useful if strings are too to fit the buttons. -->
-    <bool name="ar_app_rater_dialog_has_buttons">true</bool>
 </resources>
