@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Oleg Kan, @Simplaapliko
+ * Copyright (C) 2015 Oleg Kan
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,14 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 import java.util.Date;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
+
+@SuppressWarnings({"BooleanMethodIsAlwaysInverted", "WeakerAccess", "unused"})
 public final class AppRater {
 
     private static final int DAY = 24 * 60 * 60 * 1000;
@@ -41,7 +43,7 @@ public final class AppRater {
      *
      * @param activity FragmentActivity
      */
-    public static void appLaunched(FragmentActivity activity) {
+    public static void appLaunched(Activity activity) {
         appLaunched(activity, null, null, null);
     }
 
@@ -56,7 +58,7 @@ public final class AppRater {
      * @param onNeutralButtonListener Neutral button click listener
      */
     public static void appLaunched(
-            FragmentActivity activity,
+            Activity activity,
             DialogInterface.OnClickListener onPositiveButtonListener,
             DialogInterface.OnClickListener onNegativeButtonListener,
             DialogInterface.OnClickListener onNeutralButtonListener) {
@@ -75,32 +77,47 @@ public final class AppRater {
         }
     }
 
-    public static void showDialog(FragmentActivity activity) {
+    public static void showDialog(Activity activity) {
         showDialog(activity, null, null, null);
     }
 
     public static void showDialog(
-            FragmentActivity activity,
+            Activity activity,
             DialogInterface.OnClickListener onPositiveButtonListener,
             DialogInterface.OnClickListener onNegativeButtonListener,
             DialogInterface.OnClickListener onNeutralButtonListener) {
 
-        RateAppDialog dialog = new RateAppDialog.Builder()
-                .build();
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+                .setCancelable(true)
+                .setTitle(R.string.ar_dialog_rate_title)
+                .setMessage(R.string.ar_dialog_rate_message);
 
         if (onPositiveButtonListener != null) {
-            dialog.setOnPositiveButtonListener(onPositiveButtonListener);
+            builder.setPositiveButton(R.string.ar_dialog_rate_positive_button_rate,
+                    (dialog, which) -> {
+                        AppRater.rateApp(activity);
+                        onPositiveButtonListener.onClick(dialog, which);
+                    });
         }
 
         if (onNegativeButtonListener != null) {
-            dialog.setOnNegativeButtonListener(onNegativeButtonListener);
+            builder.setNegativeButton(R.string.ar_dialog_rate_negative_button,
+                    (dialog, which) -> {
+                        AppRater.remindLater(activity);
+                        onNegativeButtonListener.onClick(dialog, which);
+                    });
         }
 
         if (onNeutralButtonListener != null) {
-            dialog.setOnNeutralButtonListener(onNeutralButtonListener);
+            builder.setNeutralButton(R.string.ar_dialog_rate_neutral_button,
+                    (dialog, which) -> {
+                        AppRater.cancelReminders(activity);
+                        onNeutralButtonListener.onClick(dialog, which);
+                    });
         }
 
-        dialog.show((activity).getSupportFragmentManager(), null);
+        builder.create()
+                .show();
     }
 
     /**
@@ -208,9 +225,8 @@ public final class AppRater {
     }
 
     private static boolean isIntentCallable(Context context, Intent intent) {
-        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(
-                intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
+        List<ResolveInfo> list = context.getPackageManager()
+                .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() > 0;
     }
 }

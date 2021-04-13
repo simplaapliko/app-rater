@@ -14,13 +14,13 @@ repositories {
 }
 
 dependencies {
-    compile 'com.simplaapliko:app-rater:1.0.1'
+    implementation 'com.simplaapliko:app-rater:1.1.5'
 }
 ```
 
 ## License
 
-    Copyright (C) 2015 Oleg Kan, @Simplaapliko
+    Copyright (C) 2015 Oleg Kan
     
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
