@@ -10,11 +10,17 @@ A library that lets you prompt user to rate your application.
 Add the following to your `build.gradle`:
 ```gradle
 repositories {
-    jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.simplaapliko:app-rater:1.1.5'
+    ...
+
+    // add specific version
+    implementation 'com.github.simplaapliko:app-rater:x.y.z@aar'
+
+    // or a snapshot
+    // implementation 'com.github.simplaapliko:app-rater:master-SNAPSHOT@aar'
 }
 ```
 
