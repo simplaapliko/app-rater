@@ -34,7 +34,7 @@ object AppRater {
      * based on the first launch date, launch count and do not show again
      * shared preferences.
      *
-     * @param activity FragmentActivity
+     * @param activity Activity
      * @param onPositiveButtonListener Positive button click listener
      * @param onNegativeButtonListener Negative button click listener
      * @param onNeutralButtonListener Neutral button click listener

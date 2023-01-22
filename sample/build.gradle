@@ -17,12 +17,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "com.simplaapliko.apprater.sample"
         minSdkVersion 14
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -46,6 +46,5 @@ android {
 
 dependencies {
     implementation project(':app-rater')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.8.0'
 }
