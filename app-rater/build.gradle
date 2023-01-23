@@ -57,7 +57,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.simplaapliko'
                 artifactId = 'app-rater'
-                version = '1.2.0'
+                version = '1.2.2'
             }
         }
     }
