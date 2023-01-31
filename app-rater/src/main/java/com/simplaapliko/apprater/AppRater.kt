@@ -69,12 +69,12 @@ object AppRater {
     ) {
         val builder = AlertDialog.Builder(activity)
             .setCancelable(true)
-            .setTitle(R.string.ar_dialog_rate_title)
-            .setMessage(R.string.ar_dialog_rate_message)
+            .setTitle(R.string.rate_app_title)
+            .setMessage(R.string.rate_app_message)
 
         onPositiveButtonListener?.let { listener ->
             builder.setPositiveButton(
-                R.string.ar_dialog_rate_positive_button_rate
+                R.string.rate_app_positive_button
             ) { dialog: DialogInterface?, which: Int ->
                 rateApp(activity)
                 listener.onClick(dialog, which)
@@ -83,7 +83,7 @@ object AppRater {
 
         onNegativeButtonListener?.let { listener ->
             builder.setNegativeButton(
-                R.string.ar_dialog_rate_negative_button
+                R.string.rate_app_negative_button
             ) { dialog: DialogInterface?, which: Int ->
                 remindLater(activity)
                 listener.onClick(dialog, which)
@@ -92,7 +92,7 @@ object AppRater {
 
         onNeutralButtonListener?.let { listener ->
             builder.setNeutralButton(
-                R.string.ar_dialog_rate_neutral_button
+                R.string.rate_app_neutral_button
             ) { dialog: DialogInterface?, which: Int ->
                 cancelReminders(activity)
                 listener.onClick(dialog, which)
@@ -174,7 +174,7 @@ object AppRater {
 
         if (!isIntentCallable(context, rate)) {
             // if browser app doesn't exist, show toast and quit
-            Toast.makeText(context, context.getString(R.string.ar_unable_to_find_google_play), Toast.LENGTH_LONG).show()
+            Toast.makeText(context, context.getString(R.string.unable_to_find_google_play), Toast.LENGTH_LONG).show()
             return
         }
 
